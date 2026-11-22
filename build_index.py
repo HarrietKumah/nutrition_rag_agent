@@ -2,6 +2,8 @@
 # ... splits each document into chunks then embeds the chunks using the ...
 # ... openai embed model and stores them in a local chroma database
 
+# chroma database is first created here
+
 
 import os
 import chromadb
