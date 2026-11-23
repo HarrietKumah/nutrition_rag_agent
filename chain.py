@@ -13,6 +13,7 @@ prompt = ChatPromptTemplate.from_messages([
      "ONLY the context provided below. If the context doesn't contain enough "
      "information to answer, say so instead of guessing. This is for "
      "informational purposes only and is not medical advice.\n\n"
+     "Patient Info:\n{patient_info}\n\n"
      "Context:\n{context}"),
     ("human", "{question}"),
 ])
@@ -21,14 +22,19 @@ def format_context(nodes):
     return "\n\n".join(node.text for node in nodes)
 
 
-def ask(question):
+def ask(question, patient_info):
     nodes = retriever.retrieve(question)
     context = format_context(nodes)
-    messages = prompt.invoke({"context": context, "question": question})
+    messages = prompt.invoke({
+        "context": context,
+        "question": question,
+        "patient_info": patient_info,
+    })
     response = llm.invoke(messages)
     return response.content
 
 
 if __name__ == "__main__":
-    answer = ask("What are the guidelines for high fever?")
+    patient_info = open("sample_patient.txt").read()
+    answer = ask("How much protein should I be eating?", patient_info)
     print(answer)

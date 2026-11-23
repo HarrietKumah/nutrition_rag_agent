@@ -1,0 +1,17 @@
+Patient Profile:
+- Age: 58
+- Gender: Female
+- Height: 5'4" (163 cm)
+- Weight: 165 lbs (75 kg)
+- Underlying conditions: Chronic Kidney Disease (Stage 3, non-dialysis), Type 2 Diabetes, Hypertension
+- Allergies: Shellfish
+
+Most Recent Lab Results:
+- eGFR: 42 mL/min/1.73m^2
+- Serum Potassium: 5.3 mEq/L
+- Serum Sodium: 138 mEq/L
+- Serum Phosphorus: 4.8 mg/dL
+- Serum Albumin: 3.8 g/dL
+- Bicarbonate (CO2): 20 mEq/L
+- Hemoglobin: 11.5 g/dL
+- Blood Urea Nitrogen (BUN): 24 mg/dL
