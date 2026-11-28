@@ -3,9 +3,10 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import MessagesPlaceholder
 from langchain_core.messages import HumanMessage, AIMessage
 
-from retriever import get_retriever
+from retriever import get_shared_retriever
+from retriever import get_patient_retriever
 
-retriever = get_retriever()
+retriever = get_shared_retriever()
 llm = ChatOpenAI(model="gpt-4o-mini")
 
 from langchain_core.prompts import ChatPromptTemplate
@@ -27,13 +28,18 @@ def format_context(nodes):
 
 history = []
 MAX_TURNS = 5
-def ask(question, patient_info):
+def ask(question, patient_id):
     nodes = retriever.retrieve(question)
     context = format_context(nodes)
+
+    patient_retriever = get_patient_retriever(patient_id)
+    patient_nodes = patient_retriever.retrieve(question)
+    patient_context = format_context(patient_nodes)
+
     messages = prompt.invoke({
         "context": context,
         "question": question,
-        "patient_info": patient_info,
+        "patient_info": patient_context,
         "history": history
     })
     response = llm.invoke(messages)
@@ -45,12 +51,12 @@ def ask(question, patient_info):
 
 
 if __name__ == "__main__":
-    patient_info = open("sample_patient.txt").read()
+    patient_id = "jane_demo"
     questions = [
-        "Reccomended potassium intake for someone with CKD?",
-        "What about without CKD?",
+        "Reccomended potassium intake for me?",
+        "What about without my conditon?",
     ]
     for q in questions:
         print(f"\nQ: {q}")
-        print(ask(q, patient_info))
+        print(ask(q, patient_id))
         print(f"(history length: {len(history)})")

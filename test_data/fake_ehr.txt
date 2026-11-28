@@ -1,0 +1,4 @@
+Patient EHR Summary:
+- Conditions: Chronic Kidney Disease (Stage 3, non-dialysis), Type 2 Diabetes, Hypertension
+- Allergies: Shellfish
+- Past Medical History: Diagnosed with CKD in 2021. No history of dialysis. Managed with diet and medication.
